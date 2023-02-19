@@ -1,0 +1,115 @@
+<template>
+    <lightning-card>
+        <div class="slds slds-p-horizontal--medium">
+            <lightning-card>
+            <div class="slds-grid slds-wrap">
+                <div class="slds-size_1-of-3">
+                    <lightning-Input label="City" type="search" placeholder="Search..." value={accountName} required
+                        name="accountName" class="accountName" onchange={handlekeyChange}></lightning-input>
+                </div>&nbsp;&nbsp;&nbsp;&nbsp;
+                <div class="slds-size_1-of-5">
+                    <lightning-combobox required name="Days" label="Days" value={value} options={TypeOptions}
+                        onchange={handleTypeChange}> </lightning-combobox>
+                </div>&nbsp;&nbsp;
+                <div class="slds-size_1-of-5">
+                    <lightning-button style="width:20px; height:20px" size="small" variant="brand"
+                        onclick={handleAccountSearch} icon-name="utility:search"
+                        icon-position="right"></lightning-button>
+                </div>
+                
+            </div>
+        </lightning-card>
+
+            <div class="slds-p-left_x-large" style="border:1px solid white;padding:20px;font-size:20px">
+                <template if:true={data}>&nbsp;&nbsp;
+                    &nbsp;&nbsp;&nbsp;&nbsp;
+                    <div class="slds-grid slds-gutters">
+                        <div class="slds-col">
+                            <p><b>Current</b></p>
+                            <p><b>Weather:</b></p>
+                        </div>
+                        <div class="slds-col">
+                            <table class="slds-table slds-table_cell-buffer slds-table_bordered table" border="1"
+                                cellspacing="0" cellpadding="0" bordercolor="white" style="border-collapse:collapse;">
+                                <thead>
+                                    <tr>
+                                        <th style="background:#D3D3D3; heigth:5px;width:5px;">City</th>
+                                        <th style="background:#D3D3D3; heigth:5px;width:5px;">Region</th>
+                                        <th style="background:#D3D3D3; heigth:5px;width:5px;">Country</th>
+                                        <th style="background:#D3D3D3; heigth:5px;width:5px;">Time Zone</th>
+                                        <th style="background:#D3D3D3; heigth:5px;width:5px;">Current Temp</th>
+                                        <th style="background:#D3D3D3; heigth:5px;width:5px;">Current Humidity</th>
+                                        <th style="background:#D3D3D3; heigth:5px;width:5px;">Image</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <template if:true={selecteddatacoll2}>
+                                    <template for:each={selecteddatacoll2} for:item="conItem">
+                                        <tr key={conItem.Id}>
+                                            <td>{conItem.City__c}</td>
+                                            <td>{conItem.Region__c}</td>
+                                            <td>{conItem.Country__c}</td>
+                                            <td>{conItem.Time_Zone__c}</td>
+                                            <td>{conItem.Current_Temperator__c}</td>
+                                            <td>{conItem.Current_Humidity__c}</td>
+                                            <td><img src={conItem.Pic__c}></td>
+
+                                        </tr>
+                                    </template>
+                                    </template>
+                                </tbody>
+                            </table>
+                        </div>
+                        <br /><br />
+                    </div>
+
+
+
+</template>
+</div>
+<h3><strong><span style="color:brown;">{dataNotFound}</span></strong></h3><br />
+<h2 class="slds-m-bottom--x-small" style="color:darkslateblue; font-weight:bold;"></h2>
+<div class="slds-size_1-of-5" style="position: right; right: 507px;">
+    <lightning-button size="small" variant="brand"
+        onclick={saveAsPdf} icon-name="utility:arrowdown" icon-position="right"></lightning-button>
+</div>
+
+<table class="slds-table slds-table_cell-buffer slds-table_bordered table" border="1" cellspacing="0" cellpadding="0"
+    bordercolor="white" style="border-collapse:collapse;">
+    <thead>
+        <tr>
+            <th style="background:#D3D3D3; heigth:5px;width:5px;">Date</th>
+            <th style="background:#D3D3D3; heigth:5px;width:5px;">Avg Temp(c)</th>
+            <th style="background:#D3D3D3; heigth:5px;width:5px;">Max Temp(c)</th>
+            <th style="background:#D3D3D3; heigth:5px;width:5px;">Avg Humidity</th>
+            <th style="background:#D3D3D3; heigth:5px;width:5px;">Min Temp(c)</th>
+            <th style="background:#D3D3D3; heigth:5px;width:5px;">Min Temp(F)</th>
+            <th style="background:#D3D3D3; heigth:5px;width:5px;">Image</th>
+            <th style="background:#D3D3D3; heigth:5px;width:5px;">City</th>
+        </tr>
+    </thead>
+    <tbody>
+        <template if:true={selecteddatacoll}>
+            <template for:each={selecteddatacoll} for:item="conItem">
+                <tr key={conItem.Id}>
+                    <td>{conItem.Date__c}</td>
+                    <td>{conItem.Avg_temp_c__c}</td>
+                    <td>{conItem.Max_Temp_c__c}</td>
+                    <td>{conItem.Avg_Humidity__c}</td>
+                    <td>{conItem.Min_Temp_c__c}</td>
+                    <td>{conItem.Min_Temp_F__c}</td>
+                    <td><img src={conItem.Pic__c}></td>
+                    <td>{conItem.City__c}</td>
+
+                </tr>
+            </template>
+        </template>
+    </tbody>
+</table>
+</div>
+<br /><br />
+
+
+
+</lightning-card>
+</template>
